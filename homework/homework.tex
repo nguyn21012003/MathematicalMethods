@@ -450,7 +450,7 @@ One can get
 		a_{n}
 		 & = \frac{1}{\pi} \evaluated{\frac{e^{\theta} ( \cos n\theta - n \sin n \theta )}{1 + n^{2}}}_{-\pi}^{\pi} \\
 		 & = \frac{1}{\pi ( 1 + n^{2} )} \left( e^{\pi} \cos( n \pi ) - e^{-\pi} \cos( - n\pi ) \right)             \\
-		 & = \frac{( -1 )^{n}}{2\pi ( 1 + n^{2} )} \left( e^{\pi} - e^{-\pi} \right),
+		 & = \frac{( -1 )^{n}}{\pi ( 1 + n^{2} )} \left( e^{\pi} - e^{-\pi} \right),
 	\end{aligned}
 \end{equation}
 and
@@ -459,7 +459,7 @@ and
 		b_{n}
 		 & = \frac{1}{\pi} \evaluated{\frac{ e^{\theta} ( \sin n\theta - n \cos n \theta ) }{1 + n^{2}} }_{-\pi}^{\pi} \\
 		 & = \frac{n}{\pi ( 1 + n^{2} )} \left( - e^{\pi} \cos( n \pi ) + e^{-\pi} \cos( - n\pi ) \right)              \\
-		 & = -\frac{n( -1 )^{n}}{2 \pi ( 1 + n ^{2} )} \left( e^{\pi} - e^{-\pi} \right).
+		 & = -\frac{n( -1 )^{n}}{\pi ( 1 + n ^{2} )} \left( e^{\pi} - e^{-\pi} \right).
 	\end{aligned}
 \end{equation}
 $a_{0}$ can be written as
@@ -473,19 +473,32 @@ $a_{0}$ can be written as
 \end{equation}
 The Fourier series of $f(\theta) = e^{\theta}$ can be written as
 \begin{equation}
+	\label{eq: FS of e^theta}
 	\begin{aligned}
 		e^{\theta}
-		 & = \frac{1}{2 \pi} ( e^{\pi} - e^{-\pi} ) + \sum_{n = 1}^{\infty} \biggl[ \frac{( -1 )^{n}}{\pi ( 1 + n^{2} )} \left( e^{\pi} - e^{-\pi} \right) \cos n \theta \\
+		 & \simeq \frac{1}{2 \pi} ( e^{\pi} - e^{-\pi} ) + \sum_{n = 1}^{\infty} \biggl[ \frac{( -1 )^{n}}{\pi ( 1 + n^{2} )} \left( e^{\pi} - e^{-\pi} \right) \cos n \theta \\
 		 & \quad - \frac{n( -1 )^{n}}{\pi ( 1 + n ^{2} )} \left( e^{\pi} - e^{-\pi} \right) \sin n\theta \biggr],
 	\end{aligned}
 \end{equation}
 where
 \begin{gather*}
-	\sum_{n = 1}^{\infty} \frac{1}{1 + n^{2}} = \frac{1}{2} ( \pi \coth \pi - 1 ),               \\
 	a_{0} = \frac{1}{\pi} ( e^{\pi} - e^{-\pi}),                                                 \\
 	a_{n} = \frac{( -1 )^{n}}{\pi ( 1 + n^{2} )} \left( e^{\pi} - e^{-\pi} \right) \cos n \theta, \\
 	b_{n} = - \frac{n( -1 )^{n}}{\pi ( 1 + n ^{2} )} \left( e^{\pi} - e^{-\pi} \right) \sin n\theta.
 \end{gather*}
+At discontinuity, function $f(\theta) = e^{\theta}$ converges to the average of the left and right limits. In particular,
+\begin{gather}
+	S_{n} = \frac{f(\pi^{-}) + f(\pi^{+})}{2} = \frac{e^{\pi} + e^{-\pi}}{2} = \cosh \pi
+\end{gather}
+Therefore, one can rewritte Eq.~\eqref{eq: FS of e^theta} with $\theta = \pi$ as
+\begin{equation}
+	\begin{aligned}
+		\cosh \pi 
+		&= \frac{\sinh \pi}{\pi} + \frac{2\sinh \pi}{\pi} \sum_{n = 1}^{\infty} \frac{(-1)^{n}}{1+n^{2}} \cos n \pi - \frac{n(-1)^{n}}{(1+n^{2})} \sin \pi \\ 
+		&= \frac{\sinh \pi}{\pi} + \frac{2\sinh \pi}{\pi} \sum_{n = 1}^{\infty} \frac{(-1)^{n}}{1+n^{2}} (-1)^{n}\\
+		\Rightarrow & \sum_{n = 1}^{\infty} \frac{1}{1 + n^{2}} = \frac{1}{2}(\pi \coth \pi - 1).
+	\end{aligned}
+\end{equation}
 }
 \solve{
 	(c) \quad $f(\theta) = \theta e^{i\theta}$ is neither even nor odd, one can obtain the Fourier series by
@@ -664,7 +677,7 @@ A certain function $\vartheta( x,t )$ obeys the condition
 	\begin{gather*}
 		\lim\limits_{n \to \infty} \cos 2 \pi n x \neq 0 \quad for \quad x \in \mathbb{Z}.
 	\end{gather*}
-	For $t > 0$, the exponential factor $e^{- n^{2} \pi t}$ tends to zero much faster the cosine term, which ensure convergence of the series. In constrast, when $t<0$. the exponetial factor grows exponentially, causing the series to diverge.
+	For $t > 0$, the exponential factor $e^{- n^{2} \pi t}$ tends to zero much faster the cosine term, which ensure convergence of the series. In constrast, when $t<0$, the exponetial factor grows exponentially, causing the series to diverge.
 }
 
 \begin{problem}{Skinner, 1B Methods, Page 1,2}{p3}
@@ -720,7 +733,7 @@ while
 	\label{eq:rhs parseval}
 	2 \pi \sum_{n \in \mathbb{Z}} |b_{n}|^{2} = 4 \pi \sum_{n = 1}^{\infty} \frac{1}{n^{2}}.
 \end{gather}
-Using \eqref{eq:lhs parseval} and \eqref{eq:rhs parseval}, one can get
+Using Eq.~\eqref{eq:lhs parseval} and Eq.~\eqref{eq:rhs parseval}, one can get
 \begin{gather}
 	\frac{\pi^{2}}{6} = \sum_{n = 1}^{\infty} \frac{1}{n^{2}}.
 \end{gather}
