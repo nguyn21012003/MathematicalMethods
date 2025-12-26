@@ -1,4 +1,4 @@
-\documentclass{report}
+\documentclass[a4paper]{article}
 %\usepackage[utf8]{vietnam}
 \usepackage[utf8]{inputenc}
 \usepackage{anyfontsize,fontsize}
@@ -15,28 +15,54 @@
 \usepackage{upgreek}
 \usepackage{nccmath,nicematrix}
 \usepackage{mathtools}
-\usepackage{amsfonts}
-\usepackage{amsmath,systeme}
+\usepackage{amsmath,systeme,amsthm,amsfonts}
 \usepackage[thinc]{esdiff}
 \usepackage{hyperref}
 \usepackage{bm,physics}
 \usepackage{fancyhdr}
-%footnote
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{0pt}%
-\fancyhf{}%
-\fancyfoot[L]{Theoretical Physics}%
-\fancyfoot[C]{\hspace{6.5cm} \thepage}%
 
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhfoffset{0pt}
+\fancyfoot[L]{Theoretical Physics}
+\fancyfoot[R]{\thepage}
+
+
+
+\usepackage[most,many,breakable]{tcolorbox}
+\definecolor{mytheorembg}{HTML}{F2F2F9}
+\definecolor{mytheoremfr}{HTML}{00007B}
 
 \usepackage{geometry}
 \geometry{
   a4paper,
-  total={170mm,257mm},
-  left=20mm,
-  top=20mm,
+  tmargin=2cm,rmargin=1in,lmargin=1in,margin=0.85in,bmargin=2cm,footskip=.2in
 }
 
+\definecolor{doc}{RGB}{0,60,110}
+\definecolor{myg}{RGB}{56, 140, 70}
+\definecolor{myb}{RGB}{45, 111, 177}
+\definecolor{myr}{RGB}{199, 68, 64}
+\definecolor{mytheorembg}{HTML}{F2F2F9}
+\definecolor{mytheoremfr}{HTML}{00007B}
+\definecolor{mylemmabg}{HTML}{FFFAF8}
+\definecolor{mylemmafr}{HTML}{983b0f}
+\definecolor{mypropbg}{HTML}{f2fbfc}
+\definecolor{mypropfr}{HTML}{191971}
+\definecolor{myexamplebg}{HTML}{F2FBF8}
+\definecolor{myexamplefr}{HTML}{88D6D1}
+\definecolor{myexampleti}{HTML}{2A7F7F}
+\definecolor{mydefinitbg}{HTML}{E5E5FF}
+\definecolor{mydefinitfr}{HTML}{3F3FA3}
+\definecolor{notesgreen}{RGB}{0,162,0}
+\definecolor{myp}{RGB}{197, 92, 212}
+\definecolor{mygr}{HTML}{2C3338}
+\definecolor{myred}{RGB}{127,0,0}
+\definecolor{myyellow}{RGB}{169,121,69}
+\definecolor{myexercisebg}{HTML}{F2FBF8}
+\definecolor{myexercisefg}{HTML}{88D6D1}
 
 \newcommand{\image}[1]{
 \begin{figure}[H]
@@ -51,18 +77,162 @@
 \newcommand{\f}[2]{\dfrac{#1}{#2}}
 \newcommand{\at}[2]{\bigg\rvert_{#1}^{#2} }
 
+\newcommand{\Qed}{\begin{flushright} \end{flushright}}
+
+\newcommand{\solve}[1]{\setlength{\parindent}{0cm}\textbf{\textit{Solution: }}\setlength{\parindent}{1cm}#1 \Qed}
 
 \renewcommand{\baselinestretch}{2.0}
 
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem{problem}{Problem}
+{%
+	enhanced,
+	breakable,
+	colback = mytheorembg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {2pt}{0pt}{mytheoremfr},
+	sharp corners,
+	detach title,
+	% before upper = \tcbtitle\par\smallskip,
+  before upper* = \tcbtitle\par\smallskip,
+	coltitle = mytheoremfr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mytheoremfr},
+}
+{p}
+
+\newcommand{\mprob}[3]{%
+  \begin{problem}{#1}{#2}
+    #3
+  \end{problem}
+}
+
+\tcbuselibrary{theorems,skins,hooks}
+\newtcbtheorem[number within=section]{theorem}{Theorem}
+{%
+	enhanced,
+	breakable,
+	colback = mytheorembg,
+	frame hidden,
+	boxrule = 0sp,
+	borderline west = {2pt}{0pt}{mytheoremfr},
+	sharp corners,
+	detach title,
+	before upper = \tcbtitle\par\smallskip,
+	coltitle = mytheoremfr,
+	fonttitle = \bfseries\sffamily,
+	description font = \mdseries,
+	separator sign none,
+	segmentation style={solid, mytheoremfr},
+}
+{th}
+
+%================================
+% DEFINITION BOX
+%================================
+\newtcbtheorem{definition}{Definition}{%
+  enhanced,
+  before skip=2mm,
+  after skip=2mm,
+  colback=red!5,
+  colframe=red!80!black,
+  boxrule=0.5mm,
+  attach boxed title to top left={xshift=1cm,yshift*=1mm-\tcboxedtitleheight},
+  boxed title style={
+    colback=red!75!black,
+    frame code={
+      \path[fill=tcbcolback]
+        ([yshift=-1mm,xshift=-1mm]frame.north west)
+        arc[start angle=0,end angle=180,radius=1mm]
+        ([yshift=-1mm,xshift=1mm]frame.north east)
+        arc[start angle=180,end angle=0,radius=1mm];
+      \path[left color=tcbcolback!60!black,
+            right color=tcbcolback!60!black,
+            middle color=tcbcolback!80!black]
+        ([xshift=-2mm]frame.north west) --
+        ([xshift=2mm]frame.north east)
+        [rounded corners=1mm] --
+        ([xshift=1mm,yshift=-1mm]frame.north east) --
+        (frame.south east) --
+        (frame.south west) --
+        ([xshift=-1mm,yshift=-1mm]frame.north west)
+        -- cycle;
+    },
+  },
+  fonttitle=\bfseries,
+}{def}
+\newcommand{\dfn}[2]{%
+  \begin{definition}{#1}{}
+  #2
+  \end{definition}
+}
+
+%================================
+% Proof
+%================================
+\newenvironment{myproof}[1][\proofname]{%
+  \proof[\bfseries Proof: #1]%
+  \par\nobreak\smallskip
+}{\endproof}
+
+\newcommand{\pf}[2]{%
+  \begin{myproof}[#1]
+  #2
+  \end{myproof}
+}
+
+%================================
+% NOTE BOX
+%================================
+
+\usetikzlibrary{arrows,calc,shadows.blur}
+\tcbuselibrary{skins}
+\newtcolorbox{note}[1][]{%
+	enhanced jigsaw,
+	colback=gray!20!white,%
+	colframe=gray!80!black,
+	size=small,
+	boxrule=1pt,
+	title=\textbf{Note:},
+	halign title=flush center,
+	coltitle=black,
+	breakable,
+	drop shadow=black!50!white,
+	attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
+	minipage boxed title=1.5cm,
+	boxed title style={%
+		colback=white,
+		size=fbox,
+		boxrule=1pt,
+		boxsep=2pt,
+		underlay={%
+		\coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
+		\coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
+		\begin{scope}
+						\clip (interior.north west) rectangle ([xshift=3ex]interior.east);
+						\filldraw [white, blur shadow={shadow opacity=60, shadow yshift=-.75ex}, rounded corners=2pt] (interior.north west) rectangle (interior.south east);
+					\end{scope}
+					\begin{scope}[gray!80!black]
+						\fill (dotA) circle (2pt);
+						\fill (dotB) circle (2pt);
+					\end{scope}
+				},
+		},
+	#1,
+}
+\newcommand{\nt}[1]{\begin{note}#1\end{note}}
 
 \title{\Huge{A note on Mathematic Methods}}
 
 \hypersetup{
   colorlinks=true,
-  linkcolor=black,
-  filecolor=magenta,      
-  urlcolor=cyan,
-  pdftitle={},
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue!70!red,
+  pdftitle={MM},
   pdfpagemode=FullScreen,
 }
 
@@ -73,9 +243,340 @@
 \newpage
 \author{Tran Khoi Nguyen \\ Theoretical Physics}
 \maketitle
-\tableofcontents
+\thispagestyle{fancy}
+% \tableofcontents
 
-\section{Problem sheet 1}
+\section*{Problem sheet 1}
+
+\begin{problem}{David Skinner, 1B Methods, Page 1}{p1}
+\begin{itemize}
+	\item Given $f(\theta) = (\theta^{2} - \pi^{2})^{2} $, where $\theta \in [-\pi,\pi)$.
+	\item Given $f(\theta) = e^{\theta}$, where $\theta \in [-\pi,\pi)$.
+	\item Given $f(\theta) = \theta e^{i\theta}$, where $\theta \in [-\pi,\pi)$.
+\end{itemize}
+Find the Fourier series.
+\end{problem}
+\solve{
+(a)\quad$f(\theta)$ is even function. Therefore, $b_{n} = 0$, the Fourier coefficient $a_{n}$ can be written as
+\begin{equation}
+	\begin{aligned}
+		a_{n}
+		 & = \frac{1}{\pi} \int_{-\pi}^{\pi} \cos(n \theta)  f(\theta) d\theta                   \\
+		 & = \frac{1}{\pi} \int_{-\pi}^{\pi} \cos(n \theta)  (\theta^{2} - \pi^{2})^{2} d\theta.
+	\end{aligned}
+\end{equation}
+Let
+\begin{gather}
+	\begin{cases}
+		u =  (\theta^{2} - \pi^{2})^{2} \\
+		dv = \cos \left(n \theta\right) d\theta
+	\end{cases}
+	\Rightarrow
+	\begin{cases}
+		du = \left(4 \theta^{3} - 4 \pi^{2} \theta\right) d\theta \\
+		v = \dfrac{\sin(n \theta)}{n}
+	\end{cases}
+\end{gather}
+we get
+\begin{equation}
+	\begin{aligned}
+		a_{n}
+		 & = \cancelto{0}{ \evaluated{\frac{\left( \theta^{ 2 } - \pi^{ 2 }  \right)^{ 2 }}{2\pi}  \frac{\sin n \theta}{n}}_{ -\pi }^{ \pi }} - \frac{1}{2\pi}\int_{-\pi}^{\pi} \frac{\sin n \theta}{n} \left(4 \theta^{3} - 4 \pi^{2} \theta \right) d\theta,
+	\end{aligned}
+\end{equation}
+let
+\begin{gather}
+	\begin{cases}
+		u =  (4 \theta^{3} - 4\pi^{2}\theta) \\
+		dv = -\dfrac{\sin \left(n \theta\right)}{n} d\theta
+	\end{cases}
+	\Rightarrow
+	\begin{cases}
+		du = \left( 12 \theta^{2} - 4 \pi^{2} \right) d\theta \\
+		v = \dfrac{\cos n \theta}{n^{2}}
+	\end{cases}
+\end{gather}
+we get
+\begin{equation}
+	\begin{aligned}
+		a_{n} & = \cancelto{0}{\evaluated{( 4 \theta^{3} - 4 \pi^{2} \theta ) \frac{\cos n \theta}{n^{2}}}_{-\pi}^{\pi}} - \frac{1}{2\pi}\int_{-\pi}^{\pi} \frac{\cos n \theta}{n^{2}}  \left( 12 \theta^{2} - 4 \pi^{2} \right) d\theta, \\
+	\end{aligned}
+\end{equation}
+let
+\begin{gather}
+	\begin{cases}
+		u = \left( 12 \theta^{2} - 4 \pi^{2} \right) \\
+		dv = - \dfrac{\cos n \theta}{n^{2}} d\theta
+	\end{cases}
+	\Rightarrow
+	\begin{cases}
+		du = 24 \theta d\theta \\
+		v = -\dfrac{\sin n \theta}{n^{3}}
+	\end{cases}
+\end{gather}
+we get
+\begin{equation}
+	\begin{aligned}
+		a_{n} & = \evaluated{ -( 12 \theta^{2} - 4 \pi^{2} ) \frac{\sin n \theta}{n^{3}}}_{-\pi}^{\pi} + \int_{-\pi}^{\pi} \frac{\sin n \theta}{n^{3}} 24 \theta d\theta,z
+	\end{aligned}
+\end{equation}
+let
+\begin{gather}
+	\begin{cases}
+		u =  24 \theta \\
+		dv = \dfrac{\sin n \theta}{n^{3}}
+	\end{cases}
+	\Rightarrow
+	\begin{cases}
+		du = 24 d\theta \\
+		v = -\dfrac{\cos n \theta}{n^{4}}
+	\end{cases}
+\end{gather}
+the $a_{n}$ can be written as
+\begin{equation}
+	\begin{aligned}
+		a_{n}
+		 & = \evaluated{- \dfrac{24}{\pi} \theta \dfrac{\cos n \theta}{n^{4}}}_{-\pi}^{\pi} + \dfrac{24}{\pi} \int_{-\pi}^{\pi} \dfrac{\cos n \theta}{n^{4}} \\
+		 & = -\dfrac{24}{n^{4}\pi} ( \pi \cos n \pi - ( - \pi \cos( -n\pi) ) )                                                                               \\
+		 & = - \frac{48}{n^{4}} ( -1 )^{n},
+	\end{aligned}
+\end{equation}
+and $a_{0}$ is
+\begin{equation}
+	\begin{aligned}
+		a_{0} & = \frac{1}{\pi} \int_{-\pi}^{\pi} f ( \theta ) d\theta             \\
+		      & = \frac{2}{\pi} \int_{0}^{\pi} ( \theta^{2}  - pi^{2})^{2} d\theta \\
+		      & = \frac{16 \pi^{4}}{15}.
+	\end{aligned}
+\end{equation}
+The Fourier series for $f$ can be written as
+\begin{equation}
+	\begin{aligned}
+		\mathcal{F}[ f(\theta) ] & = \frac{8 \pi^{4}}{15} - \sum_{n = 1}^{\infty} \frac{48}{n^{4}} ( -1 )^{n} \cos n\theta.
+	\end{aligned}
+\end{equation}
+The $f(\theta)$ is continuous on $[ -\pi, \pi)$, therefore, for arbitrary of $\theta$, this Fourier series converge to $f(\theta)$. \footnote{If the function is continuous, the series converges to the function; otherwise, it converges to the midpoint of the jump, i.e, the left and right hand limits.}
+}
+\solve{
+(b) \quad $f(\theta)$ is neither even nor odd, the Fourier coefficients $a_{n},b_{n}$ can be written as
+\begin{equation}
+	\begin{aligned}
+		a_{n} & = \frac{1}{\pi} \int_{-\pi}^{\pi} \cos ( n\theta ) f(\theta) d\theta   \\
+		      & = \frac{1}{\pi} \int_{-\pi}^{\pi} \cos ( n\theta ) e^{\theta} d\theta,
+	\end{aligned}
+\end{equation}
+\begin{equation}
+	\begin{aligned}
+		b_{n}
+		 & = \frac{1}{\pi} \int_{-\pi}^{\pi} \sin (n\theta) f(\theta) d\theta   \\
+		 & = \frac{1}{\pi} \int_{-\pi}^{\pi} \sin (n\theta) e^{\theta} d\theta.
+	\end{aligned}
+\end{equation}
+
+\pf{$\dps \int e^{ax} \sin bx dx = \dfrac{e^{ax} ( a \sin bx - b \cos bx )}{a^{2} + b^{2}}$}{
+	Let
+	\begin{gather*}
+		I = e^{ax} \sin bx,
+	\end{gather*}
+	and
+	\begin{gather*}
+		\begin{cases}
+			u = \sin bx \\
+			dv = e^{ax} dx
+		\end{cases}
+		\Rightarrow
+		\begin{cases}
+			du = b\cos bx \\
+			v = \dfrac{e^{ax}}{a}
+		\end{cases}
+	\end{gather*}
+	One can get
+	\begin{equation*}
+		\begin{aligned}
+			\frac{e^{ax}}{a} \sin bx - \int \frac{e^{ax}}{a} b\cos bx dx.
+		\end{aligned}
+	\end{equation*}
+	Let
+	\begin{gather*}
+		J  = \frac{e^{ax}}{a} b\cos bx dx,
+	\end{gather*}
+	and
+	\begin{gather*}
+		\begin{cases}
+			u = b \cos b x \\
+			dv = \dfrac{e^{ax}}{a} d x
+		\end{cases}
+		\Rightarrow
+		\begin{cases}
+			du = - b^{2} \sin bx \\
+			v = \dfrac{e^{ax}}{a^{2}}
+		\end{cases}
+	\end{gather*}
+	One can get
+	\begin{equation*}
+		\begin{aligned}
+			J & = \frac{e^{ax}}{a^{2}}b \cos bx + \frac{b^{2}}{a^{2}} \int e^{ax} \sin bx dx \\
+			  & = \frac{e^{ax}}{a^{2}}b \cos bx + \frac{b^{2}}{a^{2}} \int I dx ,            \\
+		\end{aligned}
+	\end{equation*}
+	We can see this pattern is repeat. In particular,
+	\begin{equation*}
+		\begin{aligned}
+			\int I dx                              & = \frac{e^{ax}}{a} \sin bx - \frac{e^{ax}}{a^{2}}b \cos bx - \frac{b^{2}}{a^{2}} \int I dx \\
+			\Rightarrow ( a^{2} + b^{2} )\int I dx & = e^{ax} ( a \sin bx - b \cos bx ).
+		\end{aligned}
+	\end{equation*}
+	This leads to
+	\begin{equation*}
+		\begin{aligned}
+			\int e^{ax} \sin bx dx
+			 & = \dfrac{e^{ax} ( a \sin bx - b \cos bx )}{a^{2} + b^{2}}. \\
+		\end{aligned}
+	\end{equation*}
+}
+
+\nt{
+	\begin{equation*}
+		\begin{aligned}
+			\int e^{ax} \sin bx dx = \dfrac{e^{ax} ( a \sin bx - b \cos bx )}{a^{2} + b^{2}}, \\
+			\int e^{ax} \cos bx dx = \dfrac{e^{ax} ( a \cos bx - b \sin bx )}{a^{2} + b^{2}}.
+		\end{aligned}
+	\end{equation*}
+}
+
+One can get
+\begin{equation}
+	\begin{aligned}
+		a_{n}
+		 & = \frac{1}{\pi} \evaluated{\frac{e^{\theta} ( \cos n\theta - n \sin n \theta )}{1 + n^{2}}}_{-\pi}^{\pi} \\
+		 & = \frac{1}{\pi ( 1 + n^{2} )} \left( e^{\pi} \cos( n \pi ) - e^{-\pi} \cos( - n\pi ) \right)             \\
+		 & = \frac{( -1 )^{n}}{2\pi ( 1 + n^{2} )} \left( e^{\pi} - e^{-\pi} \right),
+	\end{aligned}
+\end{equation}
+and
+\begin{equation}
+	\begin{aligned}
+		b_{n}
+		 & = \frac{1}{\pi} \evaluated{\frac{ e^{\theta} ( \sin n\theta - n \cos n \theta ) }{1 + n^{2}} }_{-\pi}^{\pi} \\
+		 & = \frac{n}{\pi ( 1 + n^{2} )} \left( - e^{\pi} \cos( n \pi ) + e^{-\pi} \cos( - n\pi ) \right)              \\
+		 & = -\frac{n( -1 )^{n}}{2 \pi ( 1 + n ^{2} )} \left( e^{\pi} - e^{-\pi} \right).
+	\end{aligned}
+\end{equation}
+$a_{0}$ can be written as
+\begin{equation}
+	\begin{aligned}
+		a_{0}
+		 & = \frac{1}{\pi} \int_{-\pi}^{\pi} f(\theta) d\theta  \\
+		 & = \frac{1}{\pi} \int_{-\pi}^{\pi} e^{\theta} d\theta \\
+		 & = \frac{1}{\pi} ( e^{\pi} - e^{-\pi} ).
+	\end{aligned}
+\end{equation}
+The Fourier series of $f(\theta) = e^{\theta}$ can be written as
+\begin{equation}
+	\begin{aligned}
+		\mathcal{F} [ e^{\theta} ]
+		 & = \frac{1}{2 \pi} ( e^{\pi} - e^{-\pi} ) + \sum_{n = 1}^{\infty} \biggl[ \frac{( -1 )^{n}}{\pi ( 1 + n^{2} )} \left( e^{\pi} - e^{-\pi} \right) \cos n \theta \\
+		 & \quad - \frac{n( -1 )^{n}}{\pi ( 1 + n ^{2} )} \left( e^{\pi} - e^{-\pi} \right) \sin n\theta \biggr],
+	\end{aligned}
+\end{equation}
+where
+\begin{gather*}
+	\sum_{n = 1}^{\infty} \frac{1}{1 + n^{2}} = \frac{1}{2} ( \pi \coth \pi - 1 ),               \\
+	a_{0} = \frac{1}{\pi} ( e^{\pi} - e^{-\pi}),                                                 \\
+	a_{n} = \frac{( -1 )^{n}}{\pi ( 1 + n^{2} )} \left( e^{\pi} - e^{-\pi} \right) \cos n \theta, \\
+	b_{n} = - \frac{n( -1 )^{n}}{\pi ( 1 + n ^{2} )} \left( e^{\pi} - e^{-\pi} \right) \sin n\theta.
+\end{gather*}
+}
+\solve{
+	(c) \quad $f(\theta) = \theta e^{i\theta}$ is neither even nor odd, one can obtain the Fourier series by
+	\begin{gather}
+		\mathcal{F}[ \theta e^{i\theta}] = \frac{a_{0}}{2} + \sum_{n=1}^{\infty} a_{n} \cos n\theta + b_{n} \sin n \theta,
+	\end{gather}
+	where
+	\begin{gather}
+		a_{0} = \frac{1}{\pi} \int_{-\pi}^{\pi} \theta e^{i\theta} d\theta ,\\
+		a_{n} = \frac{1}{\pi} \int_{-\pi}^{\pi} \theta \cos n \theta e^{i \theta} d\theta ,\\
+		b_{n} = \frac{1}{\pi} \int_{-\pi}^{\pi} \theta \sin n \theta e^{i \theta} d\theta .
+	\end{gather}
+	\nt{
+		\begin{equation*}
+			\begin{aligned}
+				\int x e^{ax} \sin bx dx = \dfrac{x e^{ax} ( a \sin bx - b \cos bx )}{a^{2} + b^{2}} - \frac{e^{ax} \left[ ( a^{2} - b^{2} )\sin bx - 2ab \cos bx \right]}{( a^{2} + b^{2} )^{2}}, \\
+				\int x e^{ax} \cos bx dx = \dfrac{x e^{ax} ( a \cos bx - b \sin bx )}{a^{2} + b^{2}} - \frac{e^{ax} \left[ ( a^{2} - b^{2} )\cos bx + 2ab \sin bx \right]}{( a^{2} + b^{2} )^{2}}.
+			\end{aligned}
+		\end{equation*}
+	}
+	In particular,
+	\begin{gather}
+		a_{0} = -i e^{i\pi}( \pi + i ) + i e^{-i\pi}( -\pi + i ) = 2 i \pi ,
+	\end{gather}
+	and
+	\begin{equation}
+		\begin{aligned}
+			a_{n} & = \frac{1}{\pi} \int_{-\pi}^{\pi}\theta \cos n \theta e^{i \theta} d\theta ,                                                                                                                                                          \\
+			      & = \evaluated{\frac{\theta e^{i\theta}( i \cos n\theta - n \sin n \theta )}{n^{2} - 1}}_{-\pi}^{\pi} - \evaluated{\frac{e^{i\theta}\left[ ( - n^{2} - 1 )\cos n \theta + 2 i n \sin n \theta \right]}{( n^{2} - 1 )^{2}}}_{-\pi}^{\pi} \\
+			      & = -\frac{2 \pi i ( -1 )^{n}}{n^{2} - 1}.
+		\end{aligned}
+	\end{equation}
+	\begin{equation}
+		\begin{aligned}
+			b_{n} & = \frac{1}{\pi} \int_{-\pi}^{\pi}\theta \sin n \theta e^{i \theta} d\theta                                                                                                                                                              \\
+			      & = \evaluated{ \frac{\theta e^{i\theta}( i \sin n\theta - n \cos n \theta )}{n^{2} - 1} }_{-\pi}^{\pi} - \evaluated{\frac{e^{i\theta}\left[ ( - n^{2} - 1 )\sin n \theta - 2 i n \cos n \theta \right]}{( n^{2} - 1 )^{2}}}_{-\pi}^{\pi} \\
+			      & = \frac{2 \pi n ( -1 )^{n}}{n^{2} - 1}.
+		\end{aligned}
+	\end{equation}
+	Therefore, one can obtain the Fourier series for $f(\theta) = \theta \cos \theta$ and $f(\theta) = \theta \sin \theta$ by
+	\begin{gather}
+		\mathcal{F}[ \theta e^{i\theta} ] = \mathcal{F}[ \theta \cos \theta ] + i\mathcal{F}[ \theta \sin \theta ] .
+	\end{gather}
+	where
+	\begin{gather}
+		\mathcal{F}[ \theta \cos \theta ] = \Re[\frac{a_{0}}{2}] + \sum_{n=1}^{\infty} \Re[a_{n}]\cos n \theta + \Re[b_{n}] \sin n \theta,\\
+		\mathcal{F}[ \theta \sin \theta ] = \Im[\frac{a_{0}}{2}] + \sum_{n=1}^{\infty} \Im[a_{n}]\cos n \theta + \Im[b_{n}] \sin n \theta.
+	\end{gather}
+	In particular
+	\begin{gather}
+		\mathcal{F}[ \theta \cos \theta ] = \sum_{n = 1}^{\infty} \frac{2 \pi n ( -1 )^{n}}{n^{2} - 1} \sin n \theta,
+	\end{gather}
+	and
+	\begin{gather}
+		\mathcal{F}[ \theta \sin \theta ] = 2 \pi - \sum_{n = 1}^{\infty} \frac{2 \pi n ( -1 )^{n}}{n^{2} - 1} \cos n \theta.
+	\end{gather}
+}
+\newpage
+\begin{problem}{David Skinner, 1B Methods, Page 1}{p2}
+A certain function $\vartheta( x,t )$ obeys the condition
+\begin{equation*}
+	\begin{aligned}
+		\vartheta( x + 1, t )            & = \vartheta( x,t )                      \\
+		\vartheta( x + 1, t )            & = e^{\pi t - 2 \pi i x}\vartheta( x,t ) \\
+		\int_{0}^{1} \vartheta( x,t ) dx & = 1.
+	\end{aligned}
+\end{equation*}
+\begin{itemize}
+	\item[a)] Using the first condition. Find the Fourier with some unknown.
+	\item[b)] Use the remaining conditions to fix these coefficients. For what range of $t$ does the series converge?
+	\item[c)] Show that
+	      \begin{gather*}
+		      \frac{\partial \vartheta(x,t)}{\partial t} = \frac{1}{4\pi} \frac{\partial^{2} \vartheta(x,t)}{\partial x^{2}}.
+	      \end{gather*}
+\end{itemize}
+\end{problem}
+
+\begin{problem}{Skinner, 1B Methods, Page 1,2}{p3}
+The \textit{sawtooth function} is defined to be the function
+\begin{gather*}
+	f(\theta) = \theta  ,
+\end{gather*}
+for $\theta \in [ -\pi,\pi )$.
+\begin{itemize}
+	\item[a)] Compute the Fourier series of the sawtooth function and comment on its value at $\theta = \pi$.
+	\item[b)] By applying Parseval's identity to the sawtooth function, show that
+	      \begin{gather*}
+		      \frac{\pi^{2}}{6} = \sum_{n=1}^{\infty} \frac{1}{n^{2}}
+	      \end{gather*}
+\end{itemize}
+\end{problem}
 
 
 \end{document}
