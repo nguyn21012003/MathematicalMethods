@@ -225,7 +225,7 @@
 }
 \newcommand{\nt}[1]{\begin{note}#1\end{note}}
 
-\title{\Huge{A note on Mathematic Methods}}
+\title{\Huge{A solution on Mathematic Methods}}
 
 \hypersetup{
   colorlinks=true,
@@ -317,7 +317,7 @@ let
 we get
 \begin{equation}
 	\begin{aligned}
-		a_{n} & = \evaluated{ -( 12 \theta^{2} - 4 \pi^{2} ) \frac{\sin n \theta}{n^{3}}}_{-\pi}^{\pi} + \int_{-\pi}^{\pi} \frac{\sin n \theta}{n^{3}} 24 \theta d\theta,z
+		a_{n} & = \evaluated{ -( 12 \theta^{2} - 4 \pi^{2} ) \frac{\sin n \theta}{n^{3}}}_{-\pi}^{\pi} + \int_{-\pi}^{\pi} \frac{\sin n \theta}{n^{3}} 24 \theta d\theta,
 	\end{aligned}
 \end{equation}
 let
@@ -345,14 +345,14 @@ and $a_{0}$ is
 \begin{equation}
 	\begin{aligned}
 		a_{0} & = \frac{1}{\pi} \int_{-\pi}^{\pi} f ( \theta ) d\theta             \\
-		      & = \frac{2}{\pi} \int_{0}^{\pi} ( \theta^{2}  - pi^{2})^{2} d\theta \\
+		      & = \frac{2}{\pi} \int_{0}^{\pi} ( \theta^{2}  - \pi^{2})^{2} d\theta \\
 		      & = \frac{16 \pi^{4}}{15}.
 	\end{aligned}
 \end{equation}
 The Fourier series for $f$ can be written as
 \begin{equation}
 	\begin{aligned}
-		\mathcal{F}[ f(\theta) ] & = \frac{8 \pi^{4}}{15} - \sum_{n = 1}^{\infty} \frac{48}{n^{4}} ( -1 )^{n} \cos n\theta.
+		f(\theta) & = \frac{8 \pi^{4}}{15} - \sum_{n = 1}^{\infty} \frac{48}{n^{4}} ( -1 )^{n} \cos n\theta.
 	\end{aligned}
 \end{equation}
 The $f(\theta)$ is continuous on $[ -\pi, \pi)$, therefore, for arbitrary of $\theta$, this Fourier series converge to $f(\theta)$. \footnote{If the function is continuous, the series converges to the function; otherwise, it converges to the midpoint of the jump, i.e, the left and right hand limits.}
@@ -474,7 +474,7 @@ $a_{0}$ can be written as
 The Fourier series of $f(\theta) = e^{\theta}$ can be written as
 \begin{equation}
 	\begin{aligned}
-		\mathcal{F} [ e^{\theta} ]
+		e^{\theta}
 		 & = \frac{1}{2 \pi} ( e^{\pi} - e^{-\pi} ) + \sum_{n = 1}^{\infty} \biggl[ \frac{( -1 )^{n}}{\pi ( 1 + n^{2} )} \left( e^{\pi} - e^{-\pi} \right) \cos n \theta \\
 		 & \quad - \frac{n( -1 )^{n}}{\pi ( 1 + n ^{2} )} \left( e^{\pi} - e^{-\pi} \right) \sin n\theta \biggr],
 	\end{aligned}
@@ -490,7 +490,7 @@ where
 \solve{
 	(c) \quad $f(\theta) = \theta e^{i\theta}$ is neither even nor odd, one can obtain the Fourier series by
 	\begin{gather}
-		\mathcal{F}[ \theta e^{i\theta}] = \frac{a_{0}}{2} + \sum_{n=1}^{\infty} a_{n} \cos n\theta + b_{n} \sin n \theta,
+		\theta e^{i\theta} = \frac{a_{0}}{2} + \sum_{n=1}^{\infty} a_{n} \cos n\theta + b_{n} \sin n \theta,
 	\end{gather}
 	where
 	\begin{gather}
@@ -527,20 +527,20 @@ where
 	\end{equation}
 	Therefore, one can obtain the Fourier series for $f(\theta) = \theta \cos \theta$ and $f(\theta) = \theta \sin \theta$ by
 	\begin{gather}
-		\mathcal{F}[ \theta e^{i\theta} ] = \mathcal{F}[ \theta \cos \theta ] + i\mathcal{F}[ \theta \sin \theta ] .
+		\theta e^{i\theta} = \theta \cos \theta  + i \theta \sin \theta  .
 	\end{gather}
 	where
 	\begin{gather}
-		\mathcal{F}[ \theta \cos \theta ] = \Re[\frac{a_{0}}{2}] + \sum_{n=1}^{\infty} \Re[a_{n}]\cos n \theta + \Re[b_{n}] \sin n \theta,\\
-		\mathcal{F}[ \theta \sin \theta ] = \Im[\frac{a_{0}}{2}] + \sum_{n=1}^{\infty} \Im[a_{n}]\cos n \theta + \Im[b_{n}] \sin n \theta.
+		\theta \cos \theta  = \Re[\frac{a_{0}}{2}] + \sum_{n=1}^{\infty} \Re[a_{n}]\cos n \theta + \Re[b_{n}] \sin n \theta,\\
+		\theta \sin \theta = \Im[\frac{a_{0}}{2}] + \sum_{n=1}^{\infty} \Im[a_{n}]\cos n \theta + \Im[b_{n}] \sin n \theta.
 	\end{gather}
 	In particular
 	\begin{gather}
-		\mathcal{F}[ \theta \cos \theta ] = \sum_{n = 1}^{\infty} \frac{2 \pi n ( -1 )^{n}}{n^{2} - 1} \sin n \theta,
+		\theta \cos \theta = \sum_{n = 1}^{\infty} \frac{2 \pi n ( -1 )^{n}}{n^{2} - 1} \sin n \theta,
 	\end{gather}
 	and
 	\begin{gather}
-		\mathcal{F}[ \theta \sin \theta ] = 2 \pi - \sum_{n = 1}^{\infty} \frac{2 \pi n ( -1 )^{n}}{n^{2} - 1} \cos n \theta.
+		\theta \sin \theta  = 2 \pi - \sum_{n = 1}^{\infty} \frac{2 \pi n ( -1 )^{n}}{n^{2} - 1} \cos n \theta.
 	\end{gather}
 }
 \newpage
@@ -549,12 +549,12 @@ A certain function $\vartheta( x,t )$ obeys the condition
 \begin{equation*}
 	\begin{aligned}
 		\vartheta( x + 1, t )            & = \vartheta( x,t )                      \\
-		\vartheta( x + 1, t )            & = e^{\pi t - 2 \pi i x}\vartheta( x,t ) \\
+		\vartheta( x + it, t )            & = e^{\pi t - 2 \pi i x}\vartheta( x,t ) \\
 		\int_{0}^{1} \vartheta( x,t ) dx & = 1.
 	\end{aligned}
 \end{equation*}
 \begin{itemize}
-	\item[a)] Using the first condition. Find the Fourier with some unknown.
+	\item[a)] Using the first condition. Find the Fourier series with some unknown.
 	\item[b)] Use the remaining conditions to fix these coefficients. For what range of $t$ does the series converge?
 	\item[c)] Show that
 	      \begin{gather*}
@@ -562,6 +562,110 @@ A certain function $\vartheta( x,t )$ obeys the condition
 	      \end{gather*}
 \end{itemize}
 \end{problem}
+
+\solve{
+	(a) \quad The Fourier series of the function $\vartheta(x,t)$ can be written as
+	\begin{gather*}
+		\vartheta(x) = \frac{a_{0}}{2} + \sum_{n=1}^{\infty} a_{n} \cos n x + b_{n} \sin n x,
+	\end{gather*}
+	where
+	\begin{gather*}
+		a_{0} = \int_{c}^{c + 1} \vartheta(x,t) dx,
+	\end{gather*}
+	\begin{gather*}
+		a_{n} = \int_{c}^{c + 1} \vartheta(x,t) \cos (n \pi x)  dx,
+	\end{gather*}
+	\begin{gather*}
+		b_{n} = \int_{c}^{c + 1} \vartheta(x,t) \sin (n \pi x)  dx.
+	\end{gather*}
+}
+\solve{
+	(b) \quad Using the remaining conditions, one can get
+	\begin{equation}
+		\begin{aligned}
+			a_{0}
+			&= \int_{c}^{c + 1} \vartheta(x,t) dx \\
+			&= \int_{c}^{c+1} \vartheta(x,t) dx \\
+			&= \int_{0}^{1} \vartheta(x,t) dx\\
+			&= 1.
+		\end{aligned}
+	\end{equation}
+	In particular, one can obtain the complex Fourier series of $\vartheta(x,t)$ by
+	\begin{gather}
+		\vartheta(x,t) = \sum_{n = -\infty}^{\infty} c_{n}(t) e^{i 2 \pi n x},
+	\end{gather}
+	using the normalization condition, we get 
+	\begin{equation}
+		\begin{aligned}
+			\int_{0}^{1} \vartheta(x,t) dx 
+			&= \int_{0}^{1} \sum_{n = -\infty}^{\infty} c_{n}(t) e^{i 2 \pi n x} dx \\
+			& = \sum_{n = - \infty}^{\infty} \int_{0}^{1} c_{n}(t) e^{2 \pi i n x} dx, \\
+		\end{aligned}
+	\end{equation}
+	with $n = 0$, we can easily get $c_{0} = 1$ and with $n \neq 0$, the integral $\int_{0}^{1} e^{2 \pi i n x} dx = 0$. In particular
+	\begin{gather}
+		\vartheta(x,t) = 1 + \sum_{\substack{n = -\infty \\ n \neq 0}}^{\infty} c_{n}(t) e^{2 \pi i n x} dx
+	\end{gather}
+	In addition, with the second condition, we can get 
+	\begin{equation}
+		\begin{aligned}
+			\vartheta(x + it, t) 
+			&= e^{\pi t - 2 \pi i x} \vartheta(x ,t) \\ 
+			&= e^{\pi t - 2 \pi i x} \sum_{n = - \infty}^{\infty} c_{n}(t) e^{2 \pi i n x} \\ 
+			& = \sum_{n = - \infty}^{\infty} c_{n}(t) e^{2 \pi i (n - 1) x} e^{\pi t} \\
+			& = \sum_{n = \infty}^{\infty} c_{n + 1}(t) e^{2 \pi i n} e^{\pi t}
+		\end{aligned}
+	\end{equation}
+	however
+	\begin{equation}
+		\begin{aligned}
+			\vartheta(x + it, t) 
+			& = \sum_{n = - \infty}^{\infty} c_{n}(t) e^{2 \pi i n (x + it)} \\
+			& = \sum_{n = - \infty}^{\infty} c_{n}(t) e^{2 \pi i n x} e^{- 2 \pi n t},\\
+		\end{aligned}
+	\end{equation}
+	one can easily obtain the recursive formula of $c_{n}$ by
+	\begin{gather}
+		\label{eq:recursion of cn}
+		c_{n + 1} = c_{n} e^{- \pi t (2 n + 1)}.
+	\end{gather}
+	In particular,
+	\begin{equation}
+		\begin{aligned}
+			c_{1} & = c_{0} e^{-\pi t},\\
+			c_{2} & = c_{1} e^{-\pi t(2 + 1)} = c_{0} e^{-4\pi t},\\
+			c_{3} & = c_{2} e^{-\pi t(4 + 1)} = c_{0} e^{-9\pi t},\\
+			c_{4} & = c_{3} e^{-\pi t(6 + 1)} = c_{0} e^{-16\pi t},\\
+			\vdots & \\
+			c_{k} & = c_{0} e^{- k^{2} \pi t }, \\
+			c_{k+1} & = c_{k} e^{-\pi t (2 k + 1)} = c_{0} e^{- k^{2} \pi t} e^{-\pi t (2 k + 1)} = c_{0} e^{-(k+1)^{2} \pi t}. \\
+		\end{aligned}
+	\end{equation}
+	The \eqref{eq:recursion of cn} can be written as
+	\begin{gather}
+		c_{n} = c_{0} e^{- n^{2} \pi t},
+	\end{gather}
+	where $c_{0} = 1$. The Fourier series of $\vartheta(x,t)$ can be written as
+	\begin{equation}
+		\begin{aligned}
+			\vartheta(x,t) 
+			&= \sum_{n = -\infty}^{\infty} c_{n}(t) e^{2 \pi i n x} \\
+			& = c_{0} + \sum_{n = -1}^{-\infty} c_{n} e^{2 \pi i nx} + \sum_{n = 1}^{\infty} c_{n} e^{2 \pi i n x} \\
+			& = 1 + \sum_{n = -1}^{-\infty} c_{n} e^{2 \pi i nx} + \sum_{n = 1}^{\infty} c_{n} e^{2 \pi i n x} \\
+			& = 1 + \sum_{n = 1}^{\infty} e^{-n^{2} \pi t} (e^{2 \pi i n x} + e^{-2 \pi i n x}) \\
+			& = 1 + 2 \sum_{n = 1}^{\infty} e^{-n^{2} \pi t} \cos 2 \pi n x.\\
+		\end{aligned}
+	\end{equation}
+	We then investigate whether this sum is converges. Let me consider $t = 0$, this series becomes to
+	\begin{gather*}
+		\vartheta(x,t) = 1 + 2 \sum_{n = 1}^{\infty} \cos 2 \pi n x,
+	\end{gather*}
+	The series diverges for $t =0$ because
+	\begin{gather*}
+		\lim\limits_{n \to \infty} \cos 2 \pi n x \neq 0 \quad for \quad x \in \mathbb{Z}.
+	\end{gather*}
+	For $t > 0$, the exponential factor $e^{- n^{2} \pi t}$ tends to zero much faster the cosine term, which ensure convergence of the series. In constrast, when $t<0$. the exponetial factor grows exponentially, causing the series to diverge.
+}
 
 \begin{problem}{Skinner, 1B Methods, Page 1,2}{p3}
 The \textit{sawtooth function} is defined to be the function
@@ -577,6 +681,50 @@ for $\theta \in [ -\pi,\pi )$.
 	      \end{gather*}
 \end{itemize}
 \end{problem}
+
+\solve{
+(a) \quad The Fourier series of the sawtooth function can be written as
+\begin{gather}
+	f(\theta) = \theta = \sum_{n=1}^{\infty} a_{n} \cos n\theta + b_{n} \sin n \theta,
+\end{gather}
+where
+\begin{equation}
+	\begin{aligned}
+		a_{0} &= 0 , \\ 
+	\end{aligned}
+\end{equation}
+\begin{gather}
+	a_{n} = \frac{1}{\pi}\int_{-\pi}^{\pi} \theta \cos (n \theta) d\theta = 0,
+\end{gather}
+\begin{equation}
+	\begin{aligned}
+		b_{n} & = \frac{1}{\pi} \int_{-\pi}^{\pi} \theta \sin (n \theta) d\theta \\
+		& = \frac{2}{\pi} \int_{0}^{\pi} \theta \sin (n \theta) d\theta \\ 
+		& = \frac{2}{\pi} \left( \eval{- \theta \frac{\cos (n \theta)}{n}}_{0}^{\pi} + \int_{0}^{\pi} \frac{\cos (n \theta)}{n} d\theta \right) \\
+		& = - \frac{2}{n} \cos n \pi = \frac{2(-1)^{n+1}}{n}.
+	\end{aligned}
+\end{equation}
+}
+\solve{
+(b) \quad One can write the Fourier series of sawtooth function as
+\begin{gather}
+	f(\theta) = \sum_{n = 1}^{\infty} \frac{2(-1)^{n+1}}{n} = \sum_{-\infty}^{\infty} \frac{i(-1)^{n}}{n}.
+\end{gather}
+Because $f(\theta) = f(\theta)^{*}$, by applying the Parseval's identity to the sawtooth function, one can get
+\begin{gather}
+	\label{eq:lhs parseval}
+	\int_{-\pi}^{\pi} \theta^{2} d\theta = \frac{2 \pi^{3}}{3},
+\end{gather}
+while
+\begin{gather}
+	\label{eq:rhs parseval}
+	2 \pi \sum_{n \in \mathbb{Z}} |b_{n}|^{2} = 4 \pi \sum_{n = 1}^{\infty} \frac{1}{n^{2}}.
+\end{gather}
+Using \eqref{eq:lhs parseval} and \eqref{eq:rhs parseval}, one can get
+\begin{gather}
+	\frac{\pi^{2}}{6} = \sum_{n = 1}^{\infty} \frac{1}{n^{2}}.
+\end{gather}
+}
 
 
 \end{document}
