@@ -54,9 +54,9 @@
 \newcommand{\f}[2]{\dfrac{#1}{#2}}
 \newcommand{\at}[2]{\bigg\rvert_{#1}^{#2} }
 
-\newcommand{\Qed}{\begin{flushright}\qed\end{flushright}}
 
-\newcommand{\solve}[1]{\setlength{\parindent}{0cm}\textbf{\textit{Solution: }}\setlength{\parindent}{1cm}#1 \Qed}
+\newcommand{\solve}[1]{\setlength{\parindent}{0cm}\textbf{\textit{Solution: }}\setlength{\parindent}{1cm}#1}
+\newcommand{\ex}[1]{\setlength{\parindent}{0cm}\textbf{\textit{Example: }}\setlength{\parindent}{1cm}#1}
 
 \renewcommand{\baselinestretch}{2.0}
 
@@ -81,6 +81,47 @@
 }
 {p}
 
+%================================
+% NOTE BOX
+%================================
+
+\usetikzlibrary{arrows,calc,shadows.blur}
+\tcbuselibrary{skins}
+\newtcolorbox{note}[1][]{%
+	enhanced jigsaw,
+	colback=gray!20!white,%
+	colframe=gray!80!black,
+	size=small,
+	boxrule=1pt,
+	title=\textbf{Note:},
+	halign title=flush center,
+	coltitle=black,
+	breakable,
+	drop shadow=black!50!white,
+	attach boxed title to top left={xshift=1cm,yshift=-\tcboxedtitleheight/2,yshifttext=-\tcboxedtitleheight/2},
+	minipage boxed title=1.5cm,
+	boxed title style={%
+		colback=white,
+		size=fbox,
+		boxrule=1pt,
+		boxsep=2pt,
+		underlay={%
+			\coordinate (dotA) at ($(interior.west) + (-0.5pt,0)$);
+			\coordinate (dotB) at ($(interior.east) + (0.5pt,0)$);
+			\begin{scope}
+				\clip (interior.north west) rectangle ([xshift=3ex]interior.east);
+				\filldraw [white, blur shadow={shadow opacity=60, shadow yshift=-.75ex}, rounded corners=2pt] (interior.north west) rectangle (interior.south east);
+			\end{scope}
+			\begin{scope}[gray!80!black]
+				\fill (dotA) circle (2pt);
+				\fill (dotB) circle (2pt);
+			\end{scope}
+		},
+	},
+	#1,
+}
+\newcommand{\nt}[1]{\begin{note}#1\end{note}}
+
 \title{\Huge{A note on Mathematical Methods}}
 
 \hypersetup{
@@ -99,7 +140,7 @@
 \begin{document}
 \setlength{\parindent}{20pt}
 \newpage
-\author{Tran Khoi Nguyen \\Department of Theoretical Physics}
+\author{Tran Khoi Nguyen \\ Department of Theoretical Physics}
 \twocolumn[
 \maketitle
 \begin{abstract}
@@ -108,15 +149,17 @@
 \newline
 ]
 \thispagestyle{fancy}
-\section{Fourier series}
+\section*{Eigenfunction methods}
+\subsection*{Fourier series}
 \noindent We begin by reviewing Fourier series. Fourier series are defined for functions $f : S^{1} \to \mathbb{C}$ , parametrized by $\theta \in [-\pi, \pi)$. We defined the Fourier coefficients by an inner product
 	\begin{gather*}
-		\hat{f}_{n} = \frac{1}{2 \pi} \left(e^{in\theta}, f\right) \equiv \frac{1}{2 \pi} \int_{0}^{2\pi} e^{-i n \theta} f(\theta) d\theta.
+		\hat{f}_{n} = \frac{1}{2 \pi} \left(e^{in\theta}, f\right) \equiv \frac{1}{2 \pi} \int_{0}^{2\pi}  f(\theta) e^{-i n \theta} d\theta.
 	\end{gather*}
 We then claim that
 \begin{gather*}
-	f(\theta) = \sum_{n \in \mathbb{Z}} \hat{f}_{n} e^{i n \theta}.
+	f(\theta) = \sum_{n \in \mathbb{Z}} \hat{f}_{n} e^{i n \theta},
 \end{gather*}
+is the complex Fourier series for $f(\theta)$.
 In particular, via reality condition, the Fourier series can be obtained by
 \begin{gather*}
 	f(\theta) = \frac{a_{0}}{2} + \sum_{n=1}^{\infty} a_{n} \cos n\theta + b_{n} \sin n \theta,
@@ -148,13 +191,142 @@ and the Fourier coefficients for it are
 \begin{gather*}
 	\int_{-\pi}^{\pi} \abs{f(\theta)}^{2} d\theta = 2 \pi \sum_{k \in \mathbb{Z}} |\hat{f}_{k}|^{2}.
 \end{gather*}
-\lipsum[20]
-The Fourier transform is linear, and obeys
+
+\subsection*{Sturm-Liouville Theory}
+\subsubsection*{Self-adjoint matrices}
+Fourier series are simply changes of basis in function space, and linear differential operators are linear operators in function space. But Fourier series is just the tip of the iceberg, you might well be wondering whether we couldn't have found some other basis in which to expand our functions. The eigenfunction problem is defined by 
 \begin{gather*}
-	\mathcal{F}[ f(x-a) ] = e^{-i k a} \tilde{f}( k ), \\
-	\mathcal{F}[ e^{ilx} f(x) ] =  \tilde{f}( x ), \\
-	\mathcal{F}[ f(cx) ] = \frac{\tilde{f}( k/c )}{\abs{c}}
+	L y_{n}(x) = \lambda_{n} y_{n}(x),
 \end{gather*}
+along with homogeneuos boundary conditions. We define the inner product on the function space as 
+\begin{gather*}
+	(u,v) = \int_{a}^{b} u(x) v(x) dx,
+\end{gather*}
+note that there is no conjugation because we only work with real functions. Also, we define the adjoint $L^{*}$ of a linear operator $L$ by
+\begin{gather*}
+	(Ly,w) = (y, L^{*} w).
+\end{gather*}
+Suppose that we have certain homogeneuos boundary conditions on $y$. Demanding that the bondary terms vansh will induce homogeneuos boundary conditions on $w$. If $L = L^{*}$ and the boundary conditions stay the same, the problem is self-adjoint. If only $L = L^{*}$, then we call $L$ self-adjoint, or Hermitian.\\
+\ex{
+We take $L = \partial^{2}$ with $y(a) = 0$, $y'(b) - 3 y(b) = 0$. Then we have
+\begin{equation*}
+	\begin{aligned}
+		\int_{a}^{b} w y'' dx = \eval{(w y' - w' y)}_{a}^{b} + \int_{a}^{b} y w'' dx.
+	\end{aligned}
+\end{equation*}
+Hence we have $L^{*} = \partial^{2} = L$, and the induced boundary conditions are
+\begin{gather*}
+	w'(b)  - 3 w(b) = 0, \quad w(a) = 0.
+\end{gather*}
+Hence the problem is self-adjoint.
+}
+
+Now we move our interest in the eigenfuntions. The eigenfunctions of the adjoint problem have the save eigenvalues as the original problem. If $Ly = \lambda y$, there is a $w$ so that $L^{*} w = \lambda w$. (One might have thinkinkg of $L^{*}$ as the transpose of $L$, though we can't formally prove it). In particular,
+\begin{gather*}
+	L y_{j} = \lambda_{j} y_{j}, \quad L y_{k} = \lambda_{k} y_{k},
+\end{gather*}
+where the latter yields $L^{*} w_{k} = \lambda_{k} w_{k}$. Then, if $\lambda_{j} \neq \lambda_{k}$, then $\ev{y_{j}, w_{k}} = 0$. To solve a general inhomogeneuos boundary value prolem, we sovle the eigenvalue problem as well as the adjoint eigenvalue problem, to obtain $(\lambda_{j}, y_{j}, w_{j})$. To obtain a solution for $Ly = f(x)$ we assume
+\begin{gather*}
+	y = \sum_{i} c_{i} y_{i}(x).
+\end{gather*}
+We then sovle for the coefficients by projection, 
+\begin{gather*}
+	\ev{f,w_{k}} = \ev{Ly, w_{k}} = \ev{y, \lambda_{k} w_{k}} = \lambda_{k} c_{k} \ev{y_{k}, w_{k}},
+\end{gather*}
+from which we may find $c_{k}$. Finally, consider the case of inhomogeneuos boundary conditions. Such a problem can always be split into and inhomogeneuos prolem with homogeneuos boundary conditions, and a homogeneuos problem with inhomogeneuos boundary conditions. Since solving homogeneuos problems tend to be easier, this isn't much harder.\\
+\ex{
+Consider the inhomogeneuos problem
+\begin{gather*}
+	y'' = f(x), \quad y(0)=a, \quad y(1) = b,
+\end{gather*}
+where $0 \leq x \leq 1$.\\
+	\solve{
+	We suppose
+	\begin{gather*}
+		y(x) = u(x) + v(x),
+	\end{gather*}
+	where $v$ satisfies the homogeneuos boundary conditions, and $u$ satisfies the inhomogeneuos boundary condtions. We assume that $u(0) = a$ and $u(1) = b$, then one can write $u(x)$ as 
+	\begin{gather*}
+		u(x) = a(1-x) + b,
+	\end{gather*}
+	hence
+	\begin{gather*}
+		u''(x) = 0.
+	\end{gather*}
+	We then have
+	\begin{gather*}
+		(u + v)'' = f(x) \Rightarrow v'' = f(x),
+	\end{gather*}
+	where the boundary conditions is $v(0) = v(1) = 0$.
+	The homogeneuos boundary conditions are simply $y(0) = y(1) = 0$,
+	With $\lambda > 0$, the eigenfunction are
+	\begin{gather*}
+		y(x) = C e^{\sqrt{\lambda}x} + D e^{-\sqrt{\lambda}x},
+	\end{gather*}
+	are not satisfies the boundary conditions. With $\lambda=0$, this leads to the trivial solutions $y = Ax + B$. With $\lambda < 0$, so the eigenfunctions are
+	\begin{gather*}
+		y_{k}(x) = \sin( k \pi x ), \\
+		\lambda_{k} = - k^{2} \pi^{2}, \quad k = 1,2,....
+	\end{gather*}
+	The problem is self-adjoint, so $y_{k} = w_{k}$ and we have
+	\begin{gather*}
+		c_{k} = \frac{\ev{f,w_{k}}}{\lambda_{k} \ev{y_{k}, w_{k}}} = -\frac{2 \int_{0}^{1} f(x) \sin (k \pi x) dx}{k^{2} \pi^{2}}.
+	\end{gather*}
+	}
+}
+\subsubsection*{Linear differential operators}
+\noindent For most applications, we are interested in second-order linear differential operators,
+\begin{gather*}
+	\mathcal{L} = P(x) \frac{d^{2}}{dx^{2}} R(x) \frac{d}{dx} - Q(x), \quad \mathcal{L} y = 0.
+\end{gather*}
+One may simplify $\mathcal{L}$ using the method of integratin factors,
+\begin{equation*}
+	\begin{aligned}
+		\frac{1}{P(x)} \mathcal{L} 
+		&= \frac{d^{2}}{dx^{2}} + \frac{R(x)}{P(x)} \frac{d}{dx} - \frac{Q(x)}{P(x)} \\
+		& = e^{ - \int^{x} \frac{R(t)}{P(t)} dt } \frac{d}{dx} \left(e^{ \int^{x} \frac{R(t)}{P(t)} dt }\right) - \frac{Q(x)}{P(x)}.
+	\end{aligned}
+\end{equation*}
+Assuming $P(x) \neq 0$, the equation $\mathcal{L} y = 0$ is equivalent to $\frac{1}{P(x)} \mathcal{L}y  = 0$. Hence any $\mathcal{L}$ can be taken to have the form
+\begin{gather*}
+	\mathcal{L} = \frac{d}{dx} \left( p(x) \frac{d}{dx} \right) - q(x),
+\end{gather*}
+operators in this form are called Sturm-Liouville operators. Sturm-Liouville operators are self-adjoint under the inner product
+\begin{gather*}
+	(f,g) = \int_{a}^{b} f^{*}(x) g(x) dx,
+\end{gather*}
+provided that the functions on which they act obey approriate boundary conditions. To see this, apply integration by parts for
+\begin{gather*}
+	(\mathcal{L}f,g) = \left[ p(x) \left( \frac{df^{*}}{dx}g - f^{*}\frac{dg}{dx} \right) \right]_{a}^{b} - (f,\mathcal{L}g).
+\end{gather*}
+There are several possible conditions that ensure the boundary term vanishes. For example, we can demand
+\begin{gather*}
+	\frac{f(a)}{f'(a)} = c_{a}, \quad \frac{f(b)}{f'(b)} = c_{b},
+\end{gather*}
+for constants $c_{a}, c_{b}$ and for all functions $f$. Alternatively, we can demand periodicity, 
+\begin{gather*}
+	f(a) = f(b), \quad f'(a) = f'(b).
+\end{gather*}
+Another possibility is that $p(a) = p(b) = 0$, in which case the term automatically vanishes. Naturally, we always assume the functions are smooth. Next, we will consider the eigenfunctions of the Sturm-Liouville operators.
+\subsubsection*{Sturm-Liouville operators}
+\noindent A funciton $y(x)$ is and eigenfunction of $\mathcal{L}$ with eigenvalue $\lambda$ and weight function $w(x)$ if
+\begin{gather*}
+	\mathcal{L} y(x) = \lambda w(x) y(x),
+\end{gather*}
+\nt{The weight function must be real, non-negative, and have finitely many zeroes on the domain $\left[a,b\right]$.}
+\noindent We define the inner product with weight $w$ to be
+\begin{gather*}
+	(f,g)_{w} = \int_{a}^{b} f^{*}(x) g(x) w(x) dx,
+\end{gather*}
+so that $(f,g)_{w} = (f,wg) = (wf,g)$. The conditions on the weight function are chosen so that the innerproduct remains non-degenerate, i.e. $(f,f)_{w} = 0$ implies $f=0$. We take the weight function to be fixed for each problem.
+
+
+
+
+
+
+
+
 
 
 

@@ -501,16 +501,109 @@ Therefore, one can rewritte Eq.~\eqref{eq: FS of e^theta} with $\theta = \pi$ as
 \end{equation}
 }
 \solve{
-	(c) \quad $f(\theta) = \theta e^{i\theta}$ is neither even nor odd, one can obtain the Fourier series by
+	(c) \quad $f(\theta) = \theta e^{i\theta}$ is neither even nor odd, one can obtain the complex Fourier series by
 	\begin{gather}
-		\theta e^{i\theta} = \frac{a_{0}}{2} + \sum_{n=1}^{\infty} a_{n} \cos n\theta + b_{n} \sin n \theta,
+		\theta e^{i \theta} = \sum_{n = -\infty}^{\infty} c_{n}  e^{in \theta},
 	\end{gather}
 	where
+	\begin{equation}
+		\begin{aligned}
+			c_{n} &= \frac{1}{2\pi} \int_{-\pi}^{\pi} \theta e^{i \theta} e^{-i n \theta} d\theta \\
+			& = \frac{1}{2\pi} \int_{-\pi}^{\pi} \theta e^{i (1-n) \theta}  d\theta.
+		\end{aligned}
+	\end{equation}
+	When $n = 1$, the coefficient becomes
 	\begin{gather}
-		a_{0} = \frac{1}{\pi} \int_{-\pi}^{\pi} \theta e^{i\theta} d\theta ,\\
-		a_{n} = \frac{1}{\pi} \int_{-\pi}^{\pi} \theta \cos n \theta e^{i \theta} d\theta ,\\
-		b_{n} = \frac{1}{\pi} \int_{-\pi}^{\pi} \theta \sin n \theta e^{i \theta} d\theta .
+		c_{1} = 0,
 	\end{gather}
+	when $n \neq 1$, one can get
+	\begin{gather}
+		\begin{cases}
+			u = \theta ,\\
+			dv = e^{i(1-n)\theta} d\theta,
+		\end{cases}
+		\Rightarrow
+		\begin{cases}
+			d u = d\theta ,\\
+			v = \dfrac{e^{i (1-n)\theta}}{1-n}.
+		\end{cases}
+	\end{gather}
+	In particular,
+	\begin{equation}
+		\begin{aligned}
+			c_{n} 
+			&= \frac{1}{2 \pi} \left[ \eval{\theta \dfrac{e^{i ( 1 - n)\theta}}{1-n}}_{-\pi}^{\pi} - \int_{-\pi}^{\pi} \dfrac{e^{i (1 - n)\theta}}{1-n} d\theta \right] \\ 
+			& = \frac{(-1)^{(1-n)}}{i(1-n)} = \frac{i(-1)^{n}}{1-n}.
+		\end{aligned}
+	\end{equation}
+	One can write the Fourier series for $\theta e^{i\theta}$ by
+	\begin{gather}
+		\theta e^{i\theta} \simeq 	\sum_{\substack{n = -\infty \\ n \neq 1}}^{\infty} \frac{i(-1)^{n}}{1-n}  e^{in \theta}.
+	\end{gather}
+	To find Fourier series for $\theta \cos \theta$ and $\theta \sin \theta$, one can let 
+	\begin{gather}
+		\theta e^{i\theta} = \theta (\cos \theta + i \sin \theta).
+	\end{gather}
+	In particular,
+	\begin{equation}
+		\begin{aligned}
+			\theta(\cos \theta + i \sin \theta)
+			& \simeq \sum_{\substack{n = -\infty \\ n \neq 1}}^{\infty} \frac{i(-1)^{n}}{1-n} (\cos n \theta + i \sin n \theta) \\
+		\end{aligned}
+	\end{equation}
+	Therefore, one can get the real Fourier series for
+	\begin{equation}
+		\begin{aligned}
+			\theta \cos \theta 
+			& = \sum_{\substack{n = -\infty \\ n \neq 1}}^{\infty} \frac{(-1)^{n+1}}{1-n}  \sin n \theta \\
+			& = \sum_{n = 2}^{\infty} \frac{(-1)^{-n+1}}{1+n}  \sin (-n \theta) + \sum_{n = 2}^{\infty} \frac{(-1)^{n+1}}{1-n}  \sin n \theta \\
+			&= \frac{1}{2} \sin n \theta + \sum_{n = 2}^{\infty}\frac{2n (-1)^{n}}{n^{2} - 1} \sin n \theta ,
+		\end{aligned}
+	\end{equation}
+	and 
+	\begin{equation}
+		\begin{aligned}
+			\theta \sin \theta 
+			& = \sum_{\substack{n = -\infty \\ n \neq 1}}^{\infty} \frac{(-1)^{n}}{1-n}  \cos n \theta \\
+			& = \sum_{\substack{n = 2}}^{\infty} \frac{(-1)^{-n}}{1+n} \cos n \theta + \sum_{\substack{n = 2}}^{\infty} \frac{(-1)^{n}}{1-n} \cos n \theta + c_{0} + c_{1} + c_{-1} \\
+			& = \frac{2 (-1)^{n}}{1 - n^{2}} \cos n \theta + c_{0} + c_{1} + c_{-1}
+		\end{aligned}
+	\end{equation}
+	where $c_{0} = 1$, $c_{1} = 0$ and $c_{-1} = -\frac{1}{2} \cos \theta$.\\
+	Therefore the Fourier series for $f(\theta) = \theta e^{i\theta}$ is also defined by
+	\begin{gather}
+		\theta \cos \theta \simeq a_{0} + \sum_{n = 1}^{\infty} a_{n} \cos n \theta + b_{n} \sin n \theta, \\
+		\theta \sin \theta \simeq c_{0} + \sum_{n = 1}^{\infty} c_{n} \cos n \theta + d_{n} \sin n \theta,
+	\end{gather}
+	where
+	\begin{equation*}
+		\begin{aligned}
+			a_{0} & = \frac{1}{\pi} \int_{-\pi}^{\pi} \theta \cos \theta d\theta = 0, \\
+			c_{0} & = \frac{1}{\pi} \int_{-\pi}^{\pi} \theta \sin \theta d\theta = 2,
+		\end{aligned}
+	\end{equation*}
+	and 
+	\begin{equation}
+		\begin{aligned}
+			a_{n} & = \frac{1}{\pi}\int_{-\pi}^{\pi} \theta \cos \theta \cos n\theta d\theta \\
+			&= \frac{1}{2\pi} \int_{\-\pi}^{\pi} \theta \left(  \cos [(1-n)\theta] + \cos[(1+n)\theta]  \right) d\theta = 0,\\
+			b_{n} & = \frac{1}{\pi}\int_{-\pi}^{\pi} \theta \cos \theta \sin n\theta d\theta \\
+			&= \frac{1}{2 \pi} \int_{-\pi}^{\pi} \theta \left( \sin [(n-1)\theta] + \sin[(n+1)\theta] \right) d\theta \\
+			&= 
+			\begin{cases}
+				\dfrac{2 n(-1)^{n}}{n^{2} - 1} \quad \text{for} \; n > 1,\\
+				-\dfrac{1}{2} \quad \text{for} \; n = 1,
+			\end{cases}\\
+			c_{n} & = \frac{1}{\pi}\int_{-\pi}^{\pi} \theta \sin \theta \cos n\theta d\theta \\
+			&=
+			\begin{cases}
+				\dfrac{2 (-1)^{n}}{1- n^{2}} \quad \text{for} \; n > 1,\\
+				-\dfrac{1}{2} \quad \text{for} \; n = 1,
+			\end{cases} \\
+			d_{n} & = \frac{1}{\pi}\int_{-\pi}^{\pi} \theta \sin \theta \sin n\theta d\theta = 0.\\
+		\end{aligned}
+	\end{equation}
+	
 	\nt{
 		\begin{equation*}
 			\begin{aligned}
@@ -519,25 +612,25 @@ Therefore, one can rewritte Eq.~\eqref{eq: FS of e^theta} with $\theta = \pi$ as
 			\end{aligned}
 		\end{equation*}
 	}
-	In particular,
-	\begin{gather}
-		a_{0} = -i e^{i\pi}( \pi + i ) + i e^{-i\pi}( -\pi + i ) = 2 i \pi ,
-	\end{gather}
-	and
-	\begin{equation}
-		\begin{aligned}
-			a_{n} & = \frac{1}{\pi} \int_{-\pi}^{\pi}\theta \cos n \theta e^{i \theta} d\theta ,                                                                                                                                                          \\
-			      & = \evaluated{\frac{\theta e^{i\theta}( i \cos n\theta - n \sin n \theta )}{n^{2} - 1}}_{-\pi}^{\pi} - \evaluated{\frac{e^{i\theta}\left[ ( - n^{2} - 1 )\cos n \theta + 2 i n \sin n \theta \right]}{( n^{2} - 1 )^{2}}}_{-\pi}^{\pi} \\
-			      & = -\frac{2 \pi i ( -1 )^{n}}{n^{2} - 1}.
-		\end{aligned}
-	\end{equation}
-	\begin{equation}
-		\begin{aligned}
-			b_{n} & = \frac{1}{\pi} \int_{-\pi}^{\pi}\theta \sin n \theta e^{i \theta} d\theta                                                                                                                                                              \\
-			      & = \evaluated{ \frac{\theta e^{i\theta}( i \sin n\theta - n \cos n \theta )}{n^{2} - 1} }_{-\pi}^{\pi} - \evaluated{\frac{e^{i\theta}\left[ ( - n^{2} - 1 )\sin n \theta - 2 i n \cos n \theta \right]}{( n^{2} - 1 )^{2}}}_{-\pi}^{\pi} \\
-			      & = \frac{2 \pi n ( -1 )^{n}}{n^{2} - 1}.
-		\end{aligned}
-	\end{equation}
+%	In particular,
+%	\begin{gather}
+%		a_{0} = -i e^{i\pi}( \pi + i ) + i e^{-i\pi}( -\pi + i ) = 2 i \pi ,
+%	\end{gather}
+%	and
+%	\begin{equation}
+%		\begin{aligned}
+%			a_{n} & = \frac{1}{\pi} \int_{-\pi}^{\pi}\theta \cos n \theta e^{i \theta} d\theta ,                                                                                                                                                          \\
+%			      & = \evaluated{\frac{\theta e^{i\theta}( i \cos n\theta - n \sin n \theta )}{n^{2} - 1}}_{-\pi}^{\pi} - \evaluated{\frac{e^{i\theta}\left[ ( - n^{2} - 1 )\cos n \theta + 2 i n \sin n \theta \right]}{( n^{2} - 1 )^{2}}}_{-\pi}^{\pi} \\
+%			      & = -\frac{2 \pi i ( -1 )^{n}}{n^{2} - 1}.
+%		\end{aligned}
+%	\end{equation}
+%	\begin{equation}
+%		\begin{aligned}
+%			b_{n} & = \frac{1}{\pi} \int_{-\pi}^{\pi}\theta \sin n \theta e^{i \theta} d\theta                                                                                                                                                              \\
+%			      & = \evaluated{ \frac{\theta e^{i\theta}( i \sin n\theta - n \cos n \theta )}{n^{2} - 1} }_{-\pi}^{\pi} - \evaluated{\frac{e^{i\theta}\left[ ( - n^{2} - 1 )\sin n \theta - 2 i n \cos n \theta \right]}{( n^{2} - 1 )^{2}}}_{-\pi}^{\pi} \\
+%			      & = \frac{2 \pi n ( -1 )^{n}}{n^{2} - 1}.
+%		\end{aligned}
+%	\end{equation}
 	Therefore, one can obtain the Fourier series for $f(\theta) = \theta \cos \theta$ and $f(\theta) = \theta \sin \theta$ by
 	\begin{gather}
 		\theta e^{i\theta} = \theta \cos \theta  + i \theta \sin \theta  .
@@ -617,7 +710,7 @@ A certain function $\vartheta( x,t )$ obeys the condition
 	\end{equation}
 	with $n = 0$, we can easily get $c_{0} = 1$ and with $n \neq 0$, the integral $\int_{0}^{1} e^{2 \pi i n x} dx = 0$. In particular
 	\begin{gather}
-		\vartheta(x,t) = 1 + \sum_{\substack{n = -\infty \\ n \neq 0}}^{\infty} c_{n}(t) e^{2 \pi i n x} dx
+		\vartheta(x,t) = 1 + \sum_{\substack{n = -\infty \\ n \neq 0}}^{\infty} c_{n}(t) e^{2 \pi i n x} dx.
 	\end{gather}
 	In addition, with the second condition, we can get 
 	\begin{equation}
@@ -626,7 +719,7 @@ A certain function $\vartheta( x,t )$ obeys the condition
 			&= e^{\pi t - 2 \pi i x} \vartheta(x ,t) \\ 
 			&= e^{\pi t - 2 \pi i x} \sum_{n = - \infty}^{\infty} c_{n}(t) e^{2 \pi i n x} \\ 
 			& = \sum_{n = - \infty}^{\infty} c_{n}(t) e^{2 \pi i (n - 1) x} e^{\pi t} \\
-			& = \sum_{n = \infty}^{\infty} c_{n + 1}(t) e^{2 \pi i n} e^{\pi t}
+			& = \sum_{n = \infty}^{\infty} c_{n + 1}(t) e^{2 \pi i n} e^{\pi t},
 		\end{aligned}
 	\end{equation}
 	however
@@ -637,7 +730,7 @@ A certain function $\vartheta( x,t )$ obeys the condition
 			& = \sum_{n = - \infty}^{\infty} c_{n}(t) e^{2 \pi i n x} e^{- 2 \pi n t},\\
 		\end{aligned}
 	\end{equation}
-	one can easily obtain the recursive formula of $c_{n}$ by
+	one can easily obtain the recursion relation of $c_{n}$ by
 	\begin{gather}
 		\label{eq:recursion of cn}
 		c_{n + 1} = c_{n} e^{- \pi t (2 n + 1)}.
@@ -749,6 +842,40 @@ Using Eq.~\eqref{eq:lhs parseval} and Eq.~\eqref{eq:rhs parseval}, one can get
 	\end{gather}
 \end{problem}
 
-
+\solve{
+(a) \quad The Fourier series for $f(\theta)$ is defined by
+\begin{gather}
+	f(\theta) = \frac{a_{0}}{2} + \sum_{n=1}^{\infty} a_{n} \cos n\theta + b_{n} \sin n \theta,
+\end{gather}
+where
+\begin{equation}
+	\begin{aligned}
+		a_{0} 
+		& = \frac{1}{\pi} \int_{-\pi}^{\pi} f(\theta) d\theta \\
+		& = \frac{1}{\pi} \int_{0}^{\pi} d\theta \\
+		& = 1,
+	\end{aligned}
+\end{equation}
+\begin{equation}
+	\begin{aligned}
+		a_{n}
+		& = \frac{1}{\pi} \int_{-\pi}^{\pi} f(\theta) \cos n \theta d\theta \\
+		& = \frac{1}{\pi} \int_{0}^{\pi} \cos n \theta d\theta \\
+		& = 
+		\begin{cases}
+			2, \quad \text{for} \; n = 0,\\
+			0, \quad \forall n \neq 0,\\
+		\end{cases}
+	\end{aligned}
+\end{equation}
+and 
+\begin{equation}
+	\begin{aligned}
+		b_{n} 
+		& = \frac{1}{\pi} \int_{-\pi}^{\pi} f(\theta) \sin n \theta d\theta \\
+		& = 0.
+	\end{aligned}
+\end{equation}
+}
 
 \end{document}
